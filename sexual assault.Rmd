@@ -1,0 +1,34 @@
+```{r}
+library(dplyr)
+data<-read.csv("arrest1.csv")
+offences<-unique(data$Reason.for.arrest..offence.group)
+offence201516<-filter(data,Reason.for.arrest..offence.group.=="2015/16 onwards - Sexual offences")
+```
+##operating on new obtained dataset
+```{r}
+ethnicity<-unique(offence201516$Ethnic.Group..self.defined.)
+asians<-filter(offence201516,Ethnic.Group..self.defined.=="Asian or Asian British")
+white<-filter(offence201516,Ethnic.Group..self.defined.=="White")
+blacks<-filter(offence201516,Ethnic.Group..self.defined.=="Black or Black British")
+Asians2<-filter(offence201516,Ethnic.Group..self.defined.=="2019/20 onwards - Asian or Asian British")
+```
+
+##spliting into years
+```{r}
+uniyears<-unique(offence201516$Financial.Year)
+years<-split(Asians2,Asians2$Financial.Year)
+y=1
+for(i in uniyears)
+{
+  val<-(years[[i]])
+  name<-paste("Year_",y)
+  y=y+1
+  write.csv(val,file=paste(name,".csv"))
+}
+
+```
+
+```{r}
+un
+```
+
